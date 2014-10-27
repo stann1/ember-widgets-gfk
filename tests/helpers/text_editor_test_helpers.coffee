@@ -117,6 +117,8 @@ Ember.Widgets.TestHelpers.TextEditor =
         @getInnerDocument().execCommand('Delete', false, null)
       else if keyCode is KEY_CODES.DELETE
         @getInnerDocument().execCommand('ForwardDelete', false, null)
+      else if keyCode is KEY_CODES.LEFT or keyCode is KEY_CODES.RIGHT
+        # Do nothing
       else if typeof (char) is "string"
         range = @getCurrentRange() or @createNewRange()
 
