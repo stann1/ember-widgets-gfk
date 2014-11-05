@@ -54,7 +54,7 @@ Ember.Widgets.SelectOptionView = Ember.ListItemView.extend
 
 Ember.Widgets.SelectComponent =
 Ember.Component.extend Ember.Widgets.BodyEventListener,
-Ember.AddeparMixins.ResizeHandlerMixin, Ember.Widgets.DomHelper,
+Ember.AddeparMixins.ResizeHandlerMixin,
   layoutName:         'select'
   classNames:         'ember-select'
   attributeBindings:  Ember.A ['tabindex']
@@ -325,12 +325,12 @@ Ember.AddeparMixins.ResizeHandlerMixin, Ember.Widgets.DomHelper,
   keyDown: (event) ->
     # show dropdown if dropdown is not already showing
     # and the keydown is not a TAB key
-    if event.keyCode isnt @KEY_CODES.TAB and not @get 'showDropdown'
+    if event.keyCode isnt 9 and not @get 'showDropdown'
       return @set('showDropdown', yes)
     map   = @get 'KEY_EVENTS'
     method = map[event.keyCode]
     @get(method)?.apply(this, arguments) if method
-    if event.keyCode isnt @KEY_CODES.TAB
+    if event.keyCode isnt 9
       event.stopPropagation()
       event.preventDefault()
 
