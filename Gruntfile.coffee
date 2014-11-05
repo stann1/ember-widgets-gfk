@@ -153,6 +153,7 @@ module.exports = (grunt) ->
         files: [
           {src: ['dist/css/ember-widgets.css'], dest: 'gh_pages/css/ember-widgets.css'},
           {src: ['app/index.html'], dest: 'gh_pages/index.html'},
+          {expand: true, cwd: 'vendor/lodash/dist', src: ['*.js'], dest: 'gh_pages/lib/lodash'},
           {expand: true, cwd: 'dependencies/', src: ['**/*.js'], dest: 'gh_pages/lib'},
           {expand: true, cwd: 'dependencies/', src: ['**/*.css'], dest: 'gh_pages/lib'},
           {expand: true, cwd: 'vendor/', src: ['**/*.js'], dest: 'gh_pages/lib'},
