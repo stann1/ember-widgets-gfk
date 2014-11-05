@@ -337,11 +337,13 @@ Ember.AddeparMixins.ResizeHandlerMixin,
   deletePressed: Ember.K
 
   escapePressed: (event) ->
-    debugger
     @send 'hideDropdown'
     @$()[0].focus()
     event.preventDefault()
     event.stopPropagation()
+    if event.isPropagationStopped()
+      debugger
+      console.log ("Stopped")
 
   tabPressed: (event) ->
     @send 'hideDropdown'
