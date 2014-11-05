@@ -335,6 +335,8 @@ Ember.AddeparMixins.ResizeHandlerMixin,
 
   escapePressed: (event) ->
     @send 'hideDropdown'
+    @$()[0].focus()
+    event.stopPropagation()
     event.preventDefault()
 
   tabPressed: (event) ->
@@ -346,8 +348,9 @@ Ember.AddeparMixins.ResizeHandlerMixin,
     @userDidSelect(item) unless Ember.isEmpty(item)
     # in case dropdown doesn't close
     @send 'hideDropdown'
-    # TODO(Peter): HACK the web app somehow reloads when enter is pressed.
     @$()[0].focus()
+    # TODO(Peter): HACK the web app somehow reloads when enter is pressed.
+    event.stopPropagation()
     event.preventDefault()
 
   upArrowPressed: (event) ->
