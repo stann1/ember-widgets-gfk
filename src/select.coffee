@@ -323,6 +323,8 @@ Ember.AddeparMixins.ResizeHandlerMixin,
   bodyClick: -> @send 'hideDropdown'
 
   keyDown: (event) ->
+    if event.keyCode is 27
+      event.stopPropagation()
     # show dropdown if dropdown is not already showing
     # and the keydown is not a TAB key
     if event.keyCode isnt 9 and not @get 'showDropdown'
@@ -342,7 +344,6 @@ Ember.AddeparMixins.ResizeHandlerMixin,
     event.preventDefault()
     event.stopPropagation()
     if event.isPropagationStopped()
-      debugger
       console.log ("Stopped")
 
   tabPressed: (event) ->
