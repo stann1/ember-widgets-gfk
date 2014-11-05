@@ -54,7 +54,7 @@ Ember.Widgets.SelectOptionView = Ember.ListItemView.extend
 
 Ember.Widgets.SelectComponent =
 Ember.Component.extend Ember.Widgets.BodyEventListener,
-Ember.AddeparMixins.ResizeHandlerMixin,
+Ember.AddeparMixins.ResizeHandlerMixin, Ember.Widgets.DomHelper,
   layoutName:         'select'
   classNames:         'ember-select'
   attributeBindings:  Ember.A ['tabindex']
@@ -325,19 +325,23 @@ Ember.AddeparMixins.ResizeHandlerMixin,
   keyDown: (event) ->
     # show dropdown if dropdown is not already showing
     # and the keydown is not a TAB key
-    if event.keyCode isnt 9 and not @get 'showDropdown'
+    if event.keyCode isnt @KEY_CODES.TAB and not @get 'showDropdown'
       return @set('showDropdown', yes)
     map   = @get 'KEY_EVENTS'
     method = map[event.keyCode]
     @get(method)?.apply(this, arguments) if method
+    if event.keyCode isnt @KEY_CODES.TAB
+      event.stopPropagation()
+      event.preventDefault()
 
   deletePressed: Ember.K
 
   escapePressed: (event) ->
+    debugger
     @send 'hideDropdown'
     @$()[0].focus()
-    event.stopPropagation()
     event.preventDefault()
+    event.stopPropagation()
 
   tabPressed: (event) ->
     @send 'hideDropdown'
@@ -350,8 +354,8 @@ Ember.AddeparMixins.ResizeHandlerMixin,
     @send 'hideDropdown'
     @$()[0].focus()
     # TODO(Peter): HACK the web app somehow reloads when enter is pressed.
-    event.stopPropagation()
     event.preventDefault()
+    event.stopPropagation()
 
   upArrowPressed: (event) ->
     sel   = @get 'highlightedIndex'
