@@ -1,5 +1,5 @@
 # Dependencies
-require 'vendor/ember-list-view/list-view'
+require 'vendor/list-view-gfk/list-view'
 require 'vendor/bootstrap/dist/js/bootstrap'
 require 'dist/js/ember-widgets'
 
